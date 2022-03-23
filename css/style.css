@@ -40,6 +40,7 @@ main {
 #words {
     display: flex;
     height: 8vh;
+    justify-content: center;
 }
 #play {
     display: flex;
@@ -52,4 +53,8 @@ color: red;
 #hateMongers img {
 height: 250px;
 width: 100%;
+}
+#guessThe{
+    display: flex;
+    justify-content: center;
 }
