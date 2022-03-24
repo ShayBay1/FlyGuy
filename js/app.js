@@ -89,22 +89,89 @@ const goods = [
         // 'WORTH IT', 
         // 'PRACTICE MAKE PROGRESS' 
     ];
+    let currentLetters = "";
+
+
 // i need random words to be pulled for guessing
 let selection = guessWords[Math.floor(Math.random() * guessWords.length)]
-console.log(selection);
+
 // now i need that random word to be guessable 
 // for every letter of the random word we need a _ and a space in between
 let blanks = "";
 for (i = 0; i < selection.length; i++){
 if (typeof selection[i].toLowerCase() === 'string' && typeof selection[i].toUpperCase() === 'string') {
-    blanks += '_ ' 
+    blanks += '_' 
 } else {
     blanks += ' '
 }
 };
-console.log(blanks);
+
+
+function returnGuessedWord(answer, hiddenWord, lettersGuessed){
+    hiddenWord = hiddenWord.split('')
+    for (let i = 0; i < answer.length; i++) {
+        for(let j = 0; j < lettersGuessed.length; j++) {
+            if(lettersGuessed[j] === answer[i]) {
+               
+            hiddenWord[i] = lettersGuessed[j]    
+            }
+        }
+        
+    } 
+    return hiddenWord.join('');
+}
+console.log(selection)
+function spaceUnderscores (str){
+    let newStr = '' 
+    for (let i = 0; i < str.length; i++) {
+        if(str[i] !== '_') {
+            newStr += str[i]
+        } else if ( str[i]==='_'){
+            newStr += '_ '
+        }
+    }
+    return newStr
+}
+
 // we need to put 
-document.getElementById("words").innerText=blanks
+let guessedWord=document.getElementById("words")
+guessedWord.innerText=spaceUnderscores(blanks)
+// buttons need to have value
+document.getElementById("letters").addEventListener('click', handleClick);
+// now i can id the letter being or not being in the word and 
+function handleClick (e) {
+
+//Is the button thats clicked found in any index of the selection array property that been generated at random
+     if (selection.includes(e.target.innerText) && !currentLetters.includes(e.target.innerText) ){
+// yes, so now we want to replace the dash with the selected button in that letters place 
+
+        currentLetters += e.target.innerText;
+        
+        blanks = returnGuessedWord(selection, blanks, currentLetters)
+        console.log(blanks)
+        guessedWord.innerText = spaceUnderscores(blanks)
+        // for (i = 0; i < guessedWord.innerText.length; i++){
+        //     if (guessedWord.innerText[i].toLowerCase()!==guessedWord.innerText[i].toUpperCase()){
+        //         newGuess += guessedWord.innerText[i];
+        //         console.log(guessedWord, "guessedWord")
+        //         console.log(newGuess, "newguess")
+        //     }
+        //     if (selection[i] === e.target.innerText){
+        //         newGuess += e.target.innerText;
+        //         console.log(newGuess, "newguess") 
+
+
+        
+        //     }
+        // }
+        
+    }
+
+    
+}
+
+
+// player clicks a button, that button is or is not in Selection.
 
 // var word = words[Math.floor(Math.random() * words.length)];
 
