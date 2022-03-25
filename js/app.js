@@ -40,18 +40,11 @@ const goods = [
     const bads = [
         "yew cnt flii",
         "yer guna haf ta lnd sum thyme",
-        "jist chil man",
-        "wai dnt yu kik bac duuuud?",
-        "yuu dnt haffta flaii sough haei gaii",
         "yew luuk so okward up thair",
-        "jst git dowen hiir laik us",
         "flaing iznt iven kewl",
-        "hang with us dewd",
-        "itz fine just relaaaax",
         "wutza matter mannn?",
-        "yew dnt got wut et takez flaii gaii",
         "jst give up",
-        "waii you doin so much?",
+       
         "you can always just quit",
         "you dont have to flaii",
         "if yew fly youre gonna fall",
@@ -63,7 +56,6 @@ const goods = [
         "if you fly away yer gonna be all alone",
         "no ones gonna fly with yew",
         "youre gonna be alone up there",
-        "stay with us mann were yer buddeiiieeeess",
         "if yew go you cant come back",
         "yur nevr guna make it up there",
     ]
@@ -79,25 +71,20 @@ const goods = [
         'OVERWHELMED', 
         'FOCUSED',
         'STRESSED', 
-        // 'AT PEACE', 
-        // 'FREAKING OUT',
-        // 'STAYING FOCUSED',
-        // 'LOCKED IN',
-        // 'NO SOCIAL LIFE',
-        // 'I LOVE THIS',
-        // 'NO CHOICE',
-        // 'WORTH IT', 
-        // 'PRACTICE MAKE PROGRESS' 
+        'PRORGRESS',
     ];
+  
+    let livesLeftPlaceHolder =  document.querySelector('#livesLeft')
+    let messagePlaceHolder =  document.querySelector('#message')
     let currentLetters = "";
-
-
+    let livesLeft = 8;
 // i need random words to be pulled for guessing
-let selection = guessWords[Math.floor(Math.random() * guessWords.length)]
-
-// now i need that random word to be guessable 
+    let selection = guessWords[Math.floor(Math.random() * guessWords.length)];
+    let correct = goods[Math.floor(Math.random() * goods.length)];
+    let incorect = bads[Math.floor(Math.random() * bads.length)];
+// now i need the random word to be guessable.
 // for every letter of the random word we need a _ and a space in between
-let blanks = "";
+    let blanks = "";
 for (i = 0; i < selection.length; i++){
 if (typeof selection[i].toLowerCase() === 'string' && typeof selection[i].toUpperCase() === 'string') {
     blanks += '_' 
@@ -106,21 +93,20 @@ if (typeof selection[i].toLowerCase() === 'string' && typeof selection[i].toUppe
 }
 };
 
-
 function returnGuessedWord(answer, hiddenWord, lettersGuessed){
     hiddenWord = hiddenWord.split('')
     for (let i = 0; i < answer.length; i++) {
         for(let j = 0; j < lettersGuessed.length; j++) {
             if(lettersGuessed[j] === answer[i]) {
-               
-            hiddenWord[i] = lettersGuessed[j]    
+                hiddenWord[i] = lettersGuessed[j]    
             }
         }
         
     } 
     return hiddenWord.join('');
 }
-console.log(selection)
+    console.log(selection)
+// need space between underscores 
 function spaceUnderscores (str){
     let newStr = '' 
     for (let i = 0; i < str.length; i++) {
@@ -131,16 +117,22 @@ function spaceUnderscores (str){
         }
     }
     return newStr
+    
 }
+    let flyguy = document.querySelector('#flyguy img');
 
-// we need to put 
-let guessedWord=document.getElementById("words")
-guessedWord.innerText=spaceUnderscores(blanks)
+// we need to make the play button refresh the page
+    let refresh = document.getElementById('play');
+refresh.addEventListener('click', function (){
+   location.reload();
+})
+    let guessedWord=document.getElementById("words");
+guessedWord.innerText=spaceUnderscores(blanks);
 // buttons need to have value
 document.getElementById("letters").addEventListener('click', handleClick);
 // now i can id the letter being or not being in the word and 
 function handleClick (e) {
-
+    let selectionArray = selection.split('');
 //Is the button thats clicked found in any index of the selection array property that been generated at random
      if (selection.includes(e.target.innerText) && !currentLetters.includes(e.target.innerText) ){
 // yes, so now we want to replace the dash with the selected button in that letters place 
@@ -148,33 +140,26 @@ function handleClick (e) {
         currentLetters += e.target.innerText;
         
         blanks = returnGuessedWord(selection, blanks, currentLetters)
-        console.log(blanks)
         guessedWord.innerText = spaceUnderscores(blanks)
-        // for (i = 0; i < guessedWord.innerText.length; i++){
-        //     if (guessedWord.innerText[i].toLowerCase()!==guessedWord.innerText[i].toUpperCase()){
-        //         newGuess += guessedWord.innerText[i];
-        //         console.log(guessedWord, "guessedWord")
-        //         console.log(newGuess, "newguess")
-        //     }
-        //     if (selection[i] === e.target.innerText){
-        //         newGuess += e.target.innerText;
-        //         console.log(newGuess, "newguess") 
-
-
-        
-        //     }
-        // }
-        
+        messagePlaceHolder.innerText = correct;
+        if(!blanks.includes('_')){
+            alert('You Won! Click PLAY AGAIN')
+            flyguy.className = 'fly';
+        }
     }
-
-    
+// we need to keep Score, we need to win or lose.
+// if we count down lives on each wrong guess and when its 0 you lose.
+    if (selectionArray.includes(e.target.innerText)){
+        let countdownToWin=selectionArray.length;
+     // that works, and every correct guess is logging in the console.
+    // now i need it to run down each *livesLeft = 8 and at 0 you lose
+        
+    } else if (!selectionArray.includes(e.target.innerText)){
+        livesLeft--;
+        if (livesLeft <1){
+            alert('Game Over! Click Play Again')
+        }
+        messagePlaceHolder.innerText = incorect;
+        livesLeftPlaceHolder.innerText = `Lives Left: ${livesLeft}`;      
+    }
 }
-
-
-// player clicks a button, that button is or is not in Selection.
-
-// var word = words[Math.floor(Math.random() * words.length)];
-
-// console.log(word);
-
-// document.getElementById("word").textContent = word;
