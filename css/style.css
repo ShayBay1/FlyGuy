@@ -17,13 +17,23 @@ h1 {
     flex-direction: row;
     justify-content: center;
 }
-#flyguy {
-    height: 50vh;
+#flyguy{
+    display: flex;
+    justify-content: center;
+    
+}
+#flyguy img{
+    height: 300px;
+    margin-bottom: 80px;
+    z-index: 5;
+    position:absolute;
 }
 
 main {
     margin: 0;
-    height:100vh;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 
 }
 #Guy {
@@ -38,6 +48,8 @@ main {
     justify-content: space-evenly;
 }
 #words {
+    color: white;
+    padding-bottom: 10px;
     display: flex;
     height: 8vh;
     justify-content: center;
@@ -51,10 +63,30 @@ main {
 color: red;
 }
 #hateMongers img {
+padding-top: 350px;
 height: 250px;
 width: 100%;
 }
 #guessThe{
+    color: white;
+    padding: 5px;
     display: flex;
     justify-content: center;
+}
+#message, #livesLeft {
+    margin:0 auto;
+    color: white;
+    padding: 5px;
+}
+#flyguy img.fly {
+    animation: flyAway 5s infinite;
+}
+    
+@keyframes flyAway {
+    from {
+        transform: translatex(0px) translatey(0px);
+    }
+    to {
+        transform: translatex(200px) translatey(-100px);
+    }
 }
