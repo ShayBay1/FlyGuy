@@ -17,7 +17,7 @@ FLYGUY is made up of HTML, CSS, and javaScript. Deployed on GitHub
 Lets Play FLYGUY!
 
 In the link below you're able to play the game. Give it a try, its easy!
-https://shaybay1.github.io/FlyGuy/
+https://gh-flyguy.d3tkzs9nx9xlly.amplifyapp.com/
 Just guess the letters and, if you win, fly away!
 
 Down the road I'd like to incorperate a filter of some sort that will discolor and distort the page in the case that the game is lost.
