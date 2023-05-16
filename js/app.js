@@ -82,6 +82,7 @@ const goods = [
     let selection = guessWords[Math.floor(Math.random() * guessWords.length)];
     let correct = goods[Math.floor(Math.random() * goods.length)];
     let incorect = bads[Math.floor(Math.random() * bads.length)];
+    let gameOver = false;
 // now i need the random word to be guessable.
 // for every letter of the random word we need a _ and a space in between
     let blanks = "";
@@ -136,14 +137,15 @@ function handleClick (e) {
 //Is the button thats clicked found in any index of the selection array property that been generated at random
      if (selection.includes(e.target.innerText) && !currentLetters.includes(e.target.innerText) ){
 // yes, so now we want to replace the dash with the selected button in that letters place 
-
+ 
         currentLetters += e.target.innerText;
         
         blanks = returnGuessedWord(selection, blanks, currentLetters)
         guessedWord.innerText = spaceUnderscores(blanks)
         messagePlaceHolder.innerText = correct;
         if(!blanks.includes('_')){
-            alert('You Won! Click PLAY AGAIN')
+            endGame();
+            // alert('You Won! Click PLAY AGAIN')
             flyguy.className = 'fly';
         }
     }
@@ -162,4 +164,13 @@ function handleClick (e) {
         messagePlaceHolder.innerText = incorect;
         livesLeftPlaceHolder.innerText = `Lives Left: ${livesLeft}`;      
     }
+}   function endGame() {
+    //  trigger game over
+    const resultElement = document.getElementById("result")
+    if(gameOver = true){
+        messagePlaceHolder.innerText = "You Win!!!"
+        console.log('hiyaaa')
+    } else {
+        console.log('hiyaaa')
+    };
 }
