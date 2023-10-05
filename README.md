@@ -11,6 +11,12 @@ The user story in this game is made up of just a few key points.
 -In the case that no more letters remain to be guessed. the app Alerts that the user has one the game and directs the user to press the play again button.
 -In the case that the number of lives falls below 1, the Alert is displayed stating that the game is over.
 
+Photos of the users view:
+- Page upon Loading: https://imgur.com/a/HGN9vto
+- Incorrect Guess Case: https://imgur.com/a/Cvq5mzM
+- Correct Guess Case: https://imgur.com/a/wvgq7wh
+- Lose Case: https://imgur.com/a/Df6pvdT
+- Win Case: https://imgur.com/a/5QaDaei
 
 FLYGUY is made up of HTML, CSS, and javaScript. Deployed on GitHub
 
